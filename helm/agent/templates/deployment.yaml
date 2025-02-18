@@ -77,6 +77,10 @@ spec:
           {{- toYaml .Values.probes.readiness | nindent 10 }}
         resources:
           {{- toYaml .Values.resources | nindent 10 }}
+        volumeMounts:
+          {{- with .Values.extraVolumeMounts }}
+          {{ toYaml . | nindent 10 }}
+          {{- end }}
         envFrom:
         {{- include "superblocks-agent.key" . | indent 8 }}
         {{- with (concat .Values.envFrom .Values.envFrom) }}
